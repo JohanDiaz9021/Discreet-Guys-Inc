@@ -1,24 +1,23 @@
 package model.data_structures;
 
-import model.data_structures.HashTable;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class THashTable {
 
-    HashTable<Integer, String> testHash;
+    HashTable<Integer, String> hashTable;
     private final int SIZE = 3;
 
     void setUp1() {
-        testHash = new HashTable<>(SIZE);
+        hashTable = new HashTable<>(SIZE);
     }
 
     void setUp2() throws Exception {
-        testHash = new HashTable<>(SIZE);
-        testHash.insert(1, "Car");
-        testHash.insert(3, "Cat");
-        testHash.insert(6, "Dog");
+        hashTable = new HashTable<>(SIZE);
+        hashTable.insert(1, "Car");
+        hashTable.insert(3, "Cat");
+        hashTable.insert(6, "Dog");
     }
 
     @Test
@@ -26,20 +25,20 @@ public class THashTable {
         setUp1();
 
         String name1 = "Car";
-        testHash.insert(234, name1);
+        hashTable.insert(234, name1);
 
-        assertEquals(name1, testHash.search(234));
+        assertEquals(name1, hashTable.search(234));
     }
 
     @Test
     void limitInsert() {
         setUp1();
 
-        assertDoesNotThrow(() -> testHash.insert(234, "Car"));
-        assertDoesNotThrow(() -> testHash.insert(375, "House"));
-        assertDoesNotThrow(() -> testHash.insert(426, "Dog"));
-        assertThrows(Exception.class, () -> testHash.insert(426, "Cat"));
-        assertThrows(Exception.class, () -> testHash.insert(426, "Lol"));
+        assertDoesNotThrow(() -> hashTable.insert(234, "Car"));
+        assertDoesNotThrow(() -> hashTable.insert(375, "House"));
+        assertDoesNotThrow(() -> hashTable.insert(426, "Dog"));
+        assertThrows(Exception.class, () -> hashTable.insert(426, "Cat"));
+        assertThrows(Exception.class, () -> hashTable.insert(426, "Lol"));
     }
 
     @Test
@@ -47,20 +46,20 @@ public class THashTable {
         setUp1();
 
         String name1 = "Car";
-        assertNotNull(testHash.insert(234, name1));
+        assertNotNull(hashTable.insert(234, name1));
         String name2 = "House";
-        assertNotNull(testHash.insert(234, name2));
+        assertNotNull(hashTable.insert(234, name2));
         String name3 = "Dog";
-        assertNotNull(testHash.insert(234, name3));
+        assertNotNull(hashTable.insert(234, name3));
 
     }
 
     @Test
     void normalDelete() throws Exception {
         setUp2();
-        testHash.delete(3);
+        hashTable.delete(3);
 
-        assertNull(testHash.search(3));
+        assertNull(hashTable.search(3));
 
     }
 
@@ -68,16 +67,16 @@ public class THashTable {
     void limitDelete() throws Exception {
         setUp2();
 
-        assertDoesNotThrow(() -> testHash.delete(1));
-        assertDoesNotThrow(() -> testHash.delete(3));
-        assertDoesNotThrow(() -> testHash.delete(6));
+        assertDoesNotThrow(() -> hashTable.delete(1));
+        assertDoesNotThrow(() -> hashTable.delete(3));
+        assertDoesNotThrow(() -> hashTable.delete(6));
 
     }
 
     @Test
     void interestingDelete() throws Exception {
         setUp1();
-        assertThrows(Exception.class, () -> testHash.delete(1));
+        assertThrows(Exception.class, () -> hashTable.delete(1));
 
     }
 
@@ -86,25 +85,25 @@ public class THashTable {
         setUp1();
 
         String name1 = "Car";
-        testHash.insert(234, name1);
+        hashTable.insert(234, name1);
 
-        assertEquals(name1, testHash.search(234));
+        assertEquals(name1, hashTable.search(234));
 
     }
 
     @Test
     void limitSearch() throws Exception {
         setUp2();
-        assertNull(testHash.search(23425));
+        assertNull(hashTable.search(23425));
 
     }
 
     @Test
     void interestingSearch() throws Exception {
         setUp1();
-        testHash.insert(3, "hello");
-        testHash.insert(3, "bye");
-        assertNotNull(testHash.search(3));
+        hashTable.insert(3, "hello");
+        hashTable.insert(3, "bye");
+        assertNotNull(hashTable.search(3));
 
     }
 }
