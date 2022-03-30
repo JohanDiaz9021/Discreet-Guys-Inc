@@ -17,7 +17,7 @@ public class TPriorityQueue {
         priorityQueue1 = new PriorityQueue<>(SIZE);
     }
 
-    void setUp2() throws Exception {
+    void setUp2() {
         priorityQueue2 = new PriorityQueue<>(SIZE, new Comparator<Person>() {
             @Override
             public int compare(Person o1, Person o2) {
@@ -52,5 +52,41 @@ public class TPriorityQueue {
         assertEquals(p3, priorityQueue2.poll());
         assertEquals(p1, priorityQueue2.poll());
         assertEquals(p2, priorityQueue2.poll());
+    }
+
+    @Test
+    void limitInsert() throws Exception {
+        setUp1();
+
+        assertDoesNotThrow(() -> priorityQueue1.offer(1));
+        assertDoesNotThrow(() -> priorityQueue1.offer(2));
+        assertDoesNotThrow(() -> priorityQueue1.offer(3));
+
+        assertThrows(Exception.class, () -> priorityQueue1.offer(4));
+        assertThrows(Exception.class, () -> priorityQueue1.offer(5));
+    }
+
+    @Test
+    void normalPoll() throws Exception {
+        setUp1();
+        priorityQueue1.offer(3);
+
+        assertEquals(3, priorityQueue1.poll());
+    }
+
+    @Test
+    void interestingPoll() throws Exception {
+        setUp1();
+        assertThrows(Exception.class, () -> priorityQueue1.poll());
+    }
+
+    @Test
+    void normalPeek() throws Exception {
+        setUp1();
+
+        priorityQueue1.offer(3);
+
+        assertEquals(3, priorityQueue1.peek());
+        assertDoesNotThrow(() -> priorityQueue1.poll());
     }
 }
