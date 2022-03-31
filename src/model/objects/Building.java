@@ -12,7 +12,8 @@ public class Building {
     public Building(char name, int floors, int num_offices) {
         this.name = name;
         this.floors = floors;
-        offices = new HashTable<>(floors * num_offices);
+        this.num_offices = floors * num_offices;
+        offices = new HashTable<>(this.num_offices);
     }
 
     public char getName() {
@@ -21,6 +22,10 @@ public class Building {
 
     public int getFloors() {
         return floors;
+    }
+
+    public int getNum_offices() {
+        return num_offices;
     }
 
     public HashTable<Integer, Person> getOffices() {
